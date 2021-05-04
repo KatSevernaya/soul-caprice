@@ -1,0 +1,45 @@
+.the-pagination{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+}
+
+.btn{
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background: none;
+    border: none;
+}
+.btn-active {
+    border: solid 1px #000;
+}
+.loadmore {
+    font-weight: 700;
+    display: block;
+    margin: 65px auto 55px;
+    font-size: 13px;
+    width: 200px;
+}
+.invalid {
+    opacity: .3;
+}
+.button {
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    background: none;
+    width: 200px;
+}
+
+
+@media only screen and (max-width : 768px) {
+    .the-pagination {
+        margin-bottom: 30px;
+    }
+    .loadmore {
+        margin: 30px auto 20px;
+    }
+}

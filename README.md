@@ -1,4 +1,4 @@
-# soul
+# soul-caprice
 
 ## Project setup
 ```

@@ -1,30 +1,28 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+<div class="container" v-cloak>
+    <the-header></the-header>
+    <the-menu ></the-menu>
+    <the-catalog></the-catalog>
+    <the-about></the-about>
+    <the-footer></the-footer>
+</div>
+
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+import TheHeader from './components/TheHeader'
+import TheCatalog from './components/TheCatalog'
+import TheMenu from './components/TheMenu'
+import TheFooter from './components/TheFooter'
+import TheAbout from './components/TheAbout'
+
+export default {
+    components: { TheHeader, TheCatalog, TheMenu, TheFooter, TheAbout}
 }
+</script>
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+<style scoped lang="scss">
+    [v-cloak] {
+       display: none;
+    } 
 </style>

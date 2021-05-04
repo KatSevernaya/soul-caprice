@@ -1,0 +1,26 @@
+.the-catalog__breadcrumbs{
+    display: flex;
+    align-items: center;
+    padding: 30px 10px ;
+
+    p{
+      font-size: 14px;
+      line-height: 22px;
+      margin: 0;  
+    }
+
+}
+.the-catalog__breadcrumbs-arrow{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.the-catalog__breadcrumbs-product {
+    color: #666666;
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    .the-catalog__breadcrumbs{
+        padding: 15px 10px;
+    }
+}
