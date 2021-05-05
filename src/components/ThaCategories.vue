@@ -63,10 +63,8 @@ export default {
             this.categories.forEach(categoryItem => {
                 categoryItem.isSubcategoryOpen = false
             })
-            category.isSubcategoryOpen = !category.isSubcategoryOpen
-            this.isSubcategoryOpen = !this.isSubcategoryOpen
-            //this.isOpen = false
-            console.log(this.subcategory)
+            const ar = this.categories.find( categoryItem => categoryItem.name === category.name )
+            ar.isSubcategoryOpen = !ar.isSubcategoryOpen
             this.$emit('selectCategory', category, subcategory)
         },
 

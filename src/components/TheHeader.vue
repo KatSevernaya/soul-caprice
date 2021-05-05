@@ -61,6 +61,9 @@ header {
 .header__item{
     margin: 10px;
 }
+.header__rigth {
+    margin-right: 5px;
+}
 .cart{
     position: relative;
     .circle {
@@ -106,7 +109,7 @@ header {
         transform: scale(.7);
     }
      .header__item{
-     margin: 5px;
+     margin: 2px;
      }
      .cart .circle {
          width: 20px;

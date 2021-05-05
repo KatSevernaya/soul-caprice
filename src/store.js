@@ -10,7 +10,8 @@ export default createStore ({
             pagination: {
                
             },
-            searchArray: []
+            searchArray: [],
+            designersArray: []
         }
     },
     mutations: {
@@ -44,12 +45,6 @@ export default createStore ({
         PERPAGE(state) {
             return state.perPage
         },
-        CATEGORIES(state) {
-            const categoryArray = []
-            state.products.forEach(product => {
-                categoryArray.push(product.type)
-            })
-            return Array.from(new Set(designersArray))
-        }
+       
     }
 })

@@ -18,12 +18,19 @@ export default {
          designersArray: {
             type: Array
         },
+        isSubcategoryOpen: {
+            type: Boolean
+        }
+    },
+    data() {
+        return {
+            isOpen: this.isSubcategoryOpen
+        }
     },
     emits: ['selectSubcategory'],
     methods: {
         selectSubcategory(subcategory) {
-            //console.log(subcategory)
-            
+            console.log('hi')
             this.$emit('selectSubcategory',  subcategory)
         }
     }

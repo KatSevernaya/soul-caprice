@@ -35,7 +35,11 @@
                     <img src="../img/search.png" alt="">
                 </li>
             </ul>
-            <input class="catalog__input" type="text" v-if="isSearchOpen" @input="search">
+            <div class="menu__search" v-if="isSearchOpen">
+                <input class="catalog__input" type="text" @input="search">
+                <button class="button input-button" @click.prevent="searchButton">Найти</button>
+
+            </div>
     </section> 
 </template>
 
@@ -48,16 +52,28 @@ export default {
         }
     },
     methods: {
-        search(event) {
+        // search(event) {
+        //     this.$store.state.searchArray = []
+        //     const inputValue = event.target.value
+        //     this.PRODUCTS.forEach(product => {
+                 
+        //         if (product.title.toLowerCase().indexOf(inputValue) === 0) {
+        //             this.$store.state.searchArray.push(product)
+        //              //console.log(this.$store.state.searchArray)
+        //         }
+        //     })
+        // },
+        searchButton(event) {
             this.$store.state.searchArray = []
-            const inputValue = event.target.value
+            const inputValue = document.querySelector('.catalog__input').value
             this.PRODUCTS.forEach(product => {
                  
                 if (product.title.toLowerCase().indexOf(inputValue) === 0) {
                     this.$store.state.searchArray.push(product)
-                     console.log(this.$store.state.searchArray)
+                     //console.log(this.$store.state.searchArray)
                 }
             })
+            document.querySelector('.catalog__input').value = ''
         },
         active(e) {
             const linkArray = document.getElementsByClassName('catalog__link')
@@ -131,21 +147,36 @@ export default {
                 
     }
     .catalog__input {
-        display: block;
-        margin-left: auto;
-        margin-bottom: 15px;
-        margin-top: -15px;
+        // display: block;
+        // margin-left: auto;
+        // margin-bottom: 15px;
+        // margin-top: 0;
         border: solid 1px #ccc;
         width: 200px;
         height: 25px;
         box-shadow: 0 0 15px 3px rgba($color: #ccc, $alpha: .5);
+        margin: 10px 10px 0;
 
+    }
+    .menu__search {
+        display: flex;
+         //display: block;
+        justify-content: flex-end;
+        margin-bottom: 15px;
+        margin-top: 0;
+    }
+    .input-button {
+        height: 30px;
+        margin: 10px 10px 0;
+        border: solid 1px #000000;
+        text-transform: uppercase;
+        padding: 0;
     }
   
     /* Small Devices, Tablets */
     @media only screen and (max-width : 768px) {
         .catalog__item {
-            margin:4px 5px;
+            margin:0 5px;
             a {
                 font-size: 14px;
             }

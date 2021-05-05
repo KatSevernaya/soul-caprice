@@ -29,10 +29,11 @@
         <div class="the-filter">
             <the-filter @click="openFilter(), filterIsOpen=!filterIsOpen" ></the-filter>
             <div class="the-filter__wrap" v-if="filterIsOpen">
-                <div class="the-filter__slide-range" >
-                    <div class="range-title">
+                <div class="range-title">
                         <p>Ценовой <br>диапазон:</p>
                     </div>
+                <div class="the-filter__slide-range" >
+                    
                     <div class="range-value-min">
                         <p>{{minPrice}} ₽</p>
                     </div>
@@ -63,7 +64,9 @@
                     <div class="checkbox">
                         <label>
                             <input 
+                            class="checkbox-input"
                                 type="checkbox" 
+                                checked=""
                                 v-model="insertColor" 
                                 name="insertColor" 
                                 value="black"
@@ -75,7 +78,9 @@
                     <div class="checkbox">
                         <label>
                             <input 
+                            class="checkbox-input"
                                 type="checkbox" 
+                                checked=""
                                 v-model="insertColor" 
                                 name="insertColor" 
                                 value="white"
@@ -87,7 +92,9 @@
                     <div class="checkbox">
                         <label>
                             <input 
+                                class="checkbox-input"
                                 type="checkbox" 
+                                checked=""
                                 v-model="insertColor" 
                                 name="insertColor" 
                                 value="pink"
@@ -99,7 +106,9 @@
                     <div class="checkbox">
                         <label>
                             <input 
+                                class="checkbox-input"
                                 type="checkbox" 
+                                checked=""
                                 v-model="insertColor" 
                                 name="insertColor" 
                                 value="red"
@@ -111,7 +120,9 @@
                     <div class="checkbox">
                         <label>
                             <input 
+                                class="checkbox-input"
                                 type="checkbox" 
+                                checked=""
                                 v-model="insertColor" 
                                 name="insertColor" 
                                 value="blue"
@@ -123,7 +134,9 @@
                     <div class="checkbox">
                         <label>
                             <input 
+                                class="checkbox-input"
                                 type="checkbox" 
+                                checked=""
                                 v-model="insertColor" 
                                 name="insertColor" 
                                 value="green"
@@ -135,7 +148,9 @@
                     <div class="checkbox">
                         <label>
                             <input 
+                                class="checkbox-input"
                                 type="checkbox" 
+                                checked=""
                                 v-model="insertColor" 
                                 name="insertColor" 
                                 value="none"
@@ -145,7 +160,9 @@
                             </label>
                     </div>
                 </div>
+                <button class="button filter-button" @click="canceledFiltraion">СБРОСИТЬ ФИЛЬТРЫ</button>
             </div>
+            
         </div>
         
         <the-select
@@ -156,7 +173,7 @@
     </div>
     
  
-     <div class="the-catalog__wrap">
+     <div class="the-catalog__wrap" v-if="isNoneItems">
          <the-catalog-item 
           
             v-for="product in ifProductSorted"
@@ -164,7 +181,10 @@
             :product_item="product"
         ></the-catalog-item>
      </div>
-     <div class="loadmore">
+     <div class="the-catalog__notification" v-else>
+         <h3>Увы, такого украшения нет</h3>
+     </div>
+     <div class="loadmore" v-if="isNoneItems">
          <button 
             class="button btn-active" 
             @click="loadmore"
@@ -173,7 +193,7 @@
             ЗАГРУЗИТЬ ЕЩЕ
          </button>
      </div>
-     <div class="the-pagination">
+     <div class="the-pagination" v-if="isNoneItems">
         <div class="the-pagination__buttons" v-if="pages > 1" >
             <button 
                 class="btn"
@@ -227,7 +247,10 @@ export default {
             perPageIfLoadMore: null,
             pages: null,
             insertColor: [],
-            designersArray: []
+            designersArray: [],
+            typeArray: [],
+            isNoneItems: true,
+            isColorPicked: false
         }
     },
 
@@ -268,7 +291,8 @@ export default {
 
         selectCategory(category, subcategory) {
             let context = this;
-            
+            this.isNoneItems = true
+            console.log(this.sortedProducts)
             if (this.categoriedProduct.length === 0) {
                 this.sortedProducts = this.products
             } else {
@@ -279,6 +303,15 @@ export default {
             this.sortedProducts = this.sortedProducts.filter(product => {
             return product.price >= context.minPrice && product.price<= context.maxPrice
              })
+             console.log(this.sortedProducts)
+                 if (this.sortedProducts.length === 0) {
+                        this.isNoneItems = false
+                         this.openFilter() 
+                         this.sortedProducts = this.products
+                        
+                    } else {
+                         this.isNoneItems = true
+                     }
              
             if (category) {
                 if (this.categoryAssigned) { 
@@ -313,6 +346,7 @@ export default {
                             this.sortedProducts =  this.sortedProducts.filter(product => product.designer === subcategory)
                         }
                     }
+            console.log(this.sortedProducts) 
              this.categoriedProduct = this.sortedProducts
              this.setPage(this.page)
             }
@@ -373,23 +407,49 @@ export default {
             }
         },
     clickCheckbox() {
+         if ((this.categoriedProduct.length === 0)&&(this.isColorPicked)) {
+                this.sortedProducts = this.products
+            } else {
+                this.sortedProducts = this.categoriedProduct
+
+            }
         const checkboxedArray = []
-        this.products.forEach(product => {
+        this.isColorPicked = true
+        this.sortedProducts.forEach(product => {
             this.insertColor.forEach(color => {
                 if (color === product.color) {
                     checkboxedArray.push(product)
                 }
             })
         })
-        this.sortedProducts = checkboxedArray
+
+        if (checkboxedArray.length === 0) {
+            this.isNoneItems = false
+        } else {
+            this.isNoneItems = true
+            
+        }
+      
+        this.setPage(this.page)
     },
-   
+    canceledFiltraion() {
+        
+        this.sortedProducts = this.PRODUCTS
+        this.openFilter()
+        document.querySelectorAll('.checkbox-input').forEach(checkbox => {
+            
+            checkbox.checked = false
+            console.log(checkbox.checked)
+        })
+        this.isColorPicked = false
+
+    },
+  
    },
     computed: {
         ...mapGetters([
             'PRODUCTS',
-            'PERPAGE',
-            'DESIGNERS'
+            'PERPAGE'
         ]),
         products() {
             return this.$store.getters.PRODUCTS
@@ -413,6 +473,7 @@ export default {
         products(newpr, oldpr) {
             this.setPage(this.page)
             this.openFilter()
+       
 
             
   
@@ -436,8 +497,8 @@ export default {
         this.getProductsFromApi()       
     },
     updated() {
-        const btn = document.querySelectorAll('.btn')
-        btn[0].classList.add('btn-active')
+        // const btn = document.querySelectorAll('.btn')
+        // btn[0].classList.add('btn-active')
     }
 }
 </script>
@@ -472,6 +533,7 @@ export default {
     position: relative;
     img {
         max-width: 100%;
+        min-height: 90px;
     }
     h3 {
         position: absolute;
@@ -480,11 +542,20 @@ export default {
         transform: translate(50%, -100%);
         color: #fff;
         font-size: 30px;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'Roboto', sans-serif;
         font-weight: 400;
+        letter-spacing: .1em;
+        
     }
 }
-
+.the-catalog__notification{
+    h3{
+        font-size: 16px;
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+}
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
     .the-catalog__handle {
@@ -492,6 +563,7 @@ export default {
     }
     .the-catalog__banner h3, .the-catalog h2 {
         font-size: 16px;
+        
     }
 }
 

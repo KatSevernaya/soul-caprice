@@ -17,7 +17,15 @@
 .the-catalog__breadcrumbs-product {
     color: #666666;
 }
-
+.the-catalog__banner {
+    h3 {
+        text-transform: uppercase;
+        font-family: 'Roboto', sans-serif;
+    }
+    img{
+    min-height: 90px;
+}
+}
 /* Small Devices, Tablets */
 @media only screen and (max-width : 768px) {
     .the-catalog__breadcrumbs{
