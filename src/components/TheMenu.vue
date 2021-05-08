@@ -36,8 +36,8 @@
                 </li>
             </ul>
             <div class="menu__search" v-if="isSearchOpen">
-                <input class="catalog__input" type="text" @input="search">
-                <button class="button input-button" @click.prevent="searchButton">Найти</button>
+                <input class="catalog__input" type="text"  :value="text" @input="text = $event.target.value">
+                <button class="button input-button"  @click.prevent="searchButton">Найти</button>
 
             </div>
     </section> 
@@ -49,28 +49,19 @@ export default {
     data() {
         return {
             isSearchOpen: false,
+            inputSearch: '',
+            text: ''
         }
     },
     methods: {
-        // search(event) {
-        //     this.$store.state.searchArray = []
-        //     const inputValue = event.target.value
-        //     this.PRODUCTS.forEach(product => {
-                 
-        //         if (product.title.toLowerCase().indexOf(inputValue) === 0) {
-        //             this.$store.state.searchArray.push(product)
-        //              //console.log(this.$store.state.searchArray)
-        //         }
-        //     })
-        // },
+       
         searchButton(event) {
             this.$store.state.searchArray = []
             const inputValue = document.querySelector('.catalog__input').value
             this.PRODUCTS.forEach(product => {
-                 
-                if (product.title.toLowerCase().indexOf(inputValue) === 0) {
+                console.log(this.text)
+                if (product.title.toLowerCase().indexOf(this.text) === 0) {
                     this.$store.state.searchArray.push(product)
-                     //console.log(this.$store.state.searchArray)
                 }
             })
             document.querySelector('.catalog__input').value = ''
@@ -91,7 +82,19 @@ export default {
          ...mapGetters([
             'PRODUCTS'  
         ]),
-       
+        isInputSearch() {
+            return this.text
+        }
+    },
+    watch: {
+        isInputSearch(newInput, oldInput, event) {
+            this.$store.state.searchArray = []
+            this.PRODUCTS.forEach(product => {
+                if (product.title.toLowerCase().indexOf(newInput) === 0) {
+                    this.$store.state.searchArray.push(product)
+                }
+            })
+        }
     }
 }
 </script>
@@ -103,7 +106,6 @@ export default {
          display: block;
     }
     .catalog__list{
-        //width: 1200px;
         height: 90px;
         margin:  0;
         display: flex;
@@ -147,10 +149,7 @@ export default {
                 
     }
     .catalog__input {
-        // display: block;
-        // margin-left: auto;
-        // margin-bottom: 15px;
-        // margin-top: 0;
+
         border: solid 1px #ccc;
         width: 200px;
         height: 25px;
@@ -160,7 +159,6 @@ export default {
     }
     .menu__search {
         display: flex;
-         //display: block;
         justify-content: flex-end;
         margin-bottom: 15px;
         margin-top: 0;

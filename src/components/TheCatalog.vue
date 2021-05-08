@@ -292,7 +292,6 @@ export default {
         selectCategory(category, subcategory) {
             let context = this;
             this.isNoneItems = true
-            console.log(this.sortedProducts)
             if (this.categoriedProduct.length === 0) {
                 this.sortedProducts = this.products
             } else {
@@ -303,7 +302,6 @@ export default {
             this.sortedProducts = this.sortedProducts.filter(product => {
             return product.price >= context.minPrice && product.price<= context.maxPrice
              })
-             console.log(this.sortedProducts)
                  if (this.sortedProducts.length === 0) {
                         this.isNoneItems = false
                          this.openFilter() 
@@ -346,7 +344,6 @@ export default {
                             this.sortedProducts =  this.sortedProducts.filter(product => product.designer === subcategory)
                         }
                     }
-            console.log(this.sortedProducts) 
              this.categoriedProduct = this.sortedProducts
              this.setPage(this.page)
             }
@@ -407,7 +404,8 @@ export default {
             }
         },
     clickCheckbox() {
-         if ((this.categoriedProduct.length === 0)&&(this.isColorPicked)) {
+        
+         if ((this.categoriedProduct.length === 0)) {
                 this.sortedProducts = this.products
             } else {
                 this.sortedProducts = this.categoriedProduct
@@ -429,7 +427,19 @@ export default {
             this.isNoneItems = true
             
         }
-      
+      this.sortedProducts = checkboxedArray
+      //this.categoriedProduct = this.sortedProducts
+      const ifAllUncheched = []
+      document.querySelectorAll('.checkbox-input').forEach(checkbox => {
+          if (checkbox.checked === true) {
+              ifAllUncheched.push(checkbox)
+          }
+      })
+        if (ifAllUncheched.length === 0) {
+            console.log('yes')
+            this.sortedProducts = this.products
+            this.isNoneItems = true
+        }
         this.setPage(this.page)
     },
     canceledFiltraion() {
@@ -483,6 +493,7 @@ export default {
         },
         searchArray(newser, oldser) {
             this.sortedProducts = this.$store.state.searchArray
+            this.setPage(this.page)
         }
             
        
