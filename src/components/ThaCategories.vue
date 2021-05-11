@@ -104,6 +104,8 @@ export default {
     padding: 10px;
     margin: 0;
     border-radius: 3px;
+    height: 380px;
+    box-sizing: border-box;
     
 }
 .the-categories__item{

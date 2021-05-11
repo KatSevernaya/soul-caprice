@@ -194,14 +194,16 @@
          </button>
      </div>
      <div class="the-pagination" v-if="isNoneItems">
-        <div class="the-pagination__buttons" v-if="pages > 1" >
+        <div class="the-pagination__buttons" v-if="pages > 1" v-for="p in pagination.pages" :key="p">
             <button 
+                :class="{btnActive: page === p, last: (p == pages && Math.abs(p - currentPage) > 2), first: (p == 1 && Math.abs(p - currentPage) > 2)}"
+                 
+                @click="setPage(p)"
+                v-if="Math.abs(p - currentPage) < 2 || p == pages || p == 1 "
+                
                 class="btn"
-                v-for="p in pagination.pages" 
-                @click="setActiveButton($event); setPage(p);"
-                :key="p"
             >
-                {{ p }}
+                {{ p }} 
             </button>
         </div>
     </div>
@@ -212,12 +214,12 @@
 <script>
 import TheCatalogItem from './TheCatalogItem'
 import TheCategories from './ThaCategories'
-import ThePagination from './ThePagination'
+//import ThePagination from './ThePagination'
 import TheFilter from './TheFilter'
 import TheSelect from './TheSelect'
 import {mapActions, mapGetters} from 'vuex'
 export default {
-    components: { TheCatalogItem, TheSelect, TheCategories, TheFilter, ThePagination },
+    components: { TheCatalogItem, TheSelect, TheCategories, TheFilter },
     data() {
         return{
             options: [
@@ -246,11 +248,13 @@ export default {
             btnActive: false,
             perPageIfLoadMore: null,
             pages: null,
+            currentPage: 0,
             insertColor: [],
             designersArray: [],
             typeArray: [],
             isNoneItems: true,
-            isColorPicked: false
+            isColorPicked: false,
+            previousCategory: ''
         }
     },
 
@@ -286,7 +290,6 @@ export default {
             }
 
            
-           
         },
 
         selectCategory(category, subcategory) {
@@ -296,21 +299,22 @@ export default {
                 this.sortedProducts = this.products
             } else {
                 this.sortedProducts = this.categoriedProduct
-                this.categoriedProduct = []
             }
-            
+           
             this.sortedProducts = this.sortedProducts.filter(product => {
             return product.price >= context.minPrice && product.price<= context.maxPrice
              })
                  if (this.sortedProducts.length === 0) {
                         this.isNoneItems = false
-                         this.openFilter() 
-                         this.sortedProducts = this.products
+                         console.log(this.categoriedProduct)
+                         this.sortedProducts = this.categoriedProduct
                         
                     } else {
                          this.isNoneItems = true
                      }
-             
+            
+           
+           
             if (category) {
                 if (this.categoryAssigned) { 
                   this.sortedProducts = this.products  
@@ -344,10 +348,16 @@ export default {
                             this.sortedProducts =  this.sortedProducts.filter(product => product.designer === subcategory)
                         }
                     }
-             this.categoriedProduct = this.sortedProducts
-             this.setPage(this.page)
+                this.categoriedProduct = this.sortedProducts
+
+                if (this.previousCategory !== category) {
+                    if ((this.minPrice !== this.min) | (this.maxPrice !== this.max)) {
+                        this.openFilter() 
+                    } 
+                } 
             }
-    
+            this.previousCategory = category
+            this.setPage(this.page)
             
             
         },
@@ -370,20 +380,12 @@ export default {
             
             this.page = p
         },
-    setActiveButton(event) {
-            const btnArray = document.getElementsByClassName('btn')
-             btnArray.forEach(btn => {
-                 if (btn.classList.contains('btn-active')) {
-                     btn.classList.remove('btn-active')
-                 } 
-             })
-           event.target.classList.add('btn-active')
 
-    },
     paginate(data) {
             return _.slice(data, this.pagination.startIndex, this.pagination.endIndex +1 )
     },
     paginator(totalItems, currentPage) {
+            this.currentPage = currentPage
             let startIndex = (currentPage - 1) * this.perPageIfLoadMore
             let endIndex = Math.min(startIndex + this.perPageIfLoadMore - 1, totalItems - 1)
             let pages = _.range(1, Math.ceil(totalItems / this.perPageIfLoadMore) + 1)
@@ -428,7 +430,6 @@ export default {
             
         }
       this.sortedProducts = checkboxedArray
-      //this.categoriedProduct = this.sortedProducts
       const ifAllUncheched = []
       document.querySelectorAll('.checkbox-input').forEach(checkbox => {
           if (checkbox.checked === true) {
@@ -446,10 +447,10 @@ export default {
         
         this.sortedProducts = this.PRODUCTS
         this.openFilter()
+        this.setPage()
         document.querySelectorAll('.checkbox-input').forEach(checkbox => {
             
             checkbox.checked = false
-            console.log(checkbox.checked)
         })
         this.isColorPicked = false
 
@@ -506,10 +507,6 @@ export default {
     },
      mounted() {
         this.getProductsFromApi()       
-    },
-    updated() {
-        // const btn = document.querySelectorAll('.btn')
-        // btn[0].classList.add('btn-active')
     }
 }
 </script>

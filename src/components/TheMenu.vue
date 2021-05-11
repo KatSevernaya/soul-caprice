@@ -38,7 +38,7 @@
             <div class="menu__search" v-if="isSearchOpen">
                 <input class="catalog__input" type="text"  :value="text" @input="text = $event.target.value">
                 <button class="button input-button"  @click.prevent="searchButton">Найти</button>
-
+               
             </div>
     </section> 
 </template>
@@ -60,7 +60,7 @@ export default {
             const inputValue = document.querySelector('.catalog__input').value
             this.PRODUCTS.forEach(product => {
                 console.log(this.text)
-                if (product.title.toLowerCase().indexOf(this.text) === 0) {
+                if (product.title.toLowerCase().indexOf(this.text.toLowerCase) === 0) {
                     this.$store.state.searchArray.push(product)
                 }
             })
@@ -90,7 +90,7 @@ export default {
         isInputSearch(newInput, oldInput, event) {
             this.$store.state.searchArray = []
             this.PRODUCTS.forEach(product => {
-                if (product.title.toLowerCase().indexOf(newInput) === 0) {
+                if (product.title.toLowerCase().indexOf(newInput.toLowerCase()) === 0) {
                     this.$store.state.searchArray.push(product)
                 }
             })

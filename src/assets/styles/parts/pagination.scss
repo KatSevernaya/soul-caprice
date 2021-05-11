@@ -13,7 +13,7 @@
     background: none;
     border: none;
 }
-.btn-active {
+.btnActive {
     border: solid 1px #000;
 }
 .loadmore {
@@ -32,6 +32,18 @@
     font-size: 13px;
     background: none;
     width: 200px;
+}
+button.first{
+    margin-right: 20px;
+    &::after {
+    content:'...';
+    margin-left: 20px;
+    
+}}
+button.last::before {
+    content:'...';
+   
+    margin-right: 20px;
 }
 
 

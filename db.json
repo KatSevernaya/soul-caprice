@@ -163,6 +163,170 @@
         "img": "item-16.jpg",
         "wasBougth": 70,
 		    "color": "white"
+      },
+      {
+        "title": "Браслет Колибри", 
+        "designer": "HONEY HANY", 
+        "price": 1200, 
+        "type": "Bracelet", 
+        "id": "017", 
+        "img": "item-1.jpg",
+        "wasBougth": 25,
+		      "color": "blue"
+      },
+      {
+        "title": "Браслет-Кафф с радужным обсидианом", 
+        "designer": "WAVES&GEMS", 
+        "price": 2200, 
+        "type": "Bracelet", 
+        "id": "018", 
+        "img": "item-2.jpg",
+        "wasBougth": 90,
+		    "color": "black"
+      },
+      {
+        "title": "Браслет-Кафф \n с розовым кварцем", 
+        "designer": "WAVES&GEMS", 
+        "price": 3200, 
+        "type": "Bracelet", 
+        "id": "019", 
+        "img": "item-3.jpg",
+        "wasBougth": 88,
+		    "color": "pink"
+      },
+      {
+        "title": "Браслет с черным \n жемчугом и гематитами", 
+        "designer": "WAVES&GEMS", 
+        "price": 2000, 
+        "type": "Bracelet", 
+        "id": "020", 
+        "img": "item-4.jpg",
+        "wasBougth": 9,
+		    "color": "black"
+		
+      },
+      {
+        "title": "Браслет с белым \n жемчугом и перламутром", 
+        "designer": "HONEY HANY", 
+        "price": 500, 
+        "type": "Bracelet", 
+        "id": "021", 
+        "img": "item-5.jpg",
+        "wasBougth": 19,
+		    "color": "white"
+      },
+      {
+        "title": "Браслет фенечка \n с розовым жемчугом", 
+        "designer": "WAVES&GEMS", 
+        "price": 1300, 
+        "type": "Bracelet", 
+        "id": "022", 
+        "img": "item-6.jpg",
+        "wasBougth": 15,
+		    "color": "pink"
+		
+      },
+      {
+        "title": "Браслет-нитка \n с цветком Франжипани", 
+        "designer": "WAVES&GEMS", 
+        "price": 7700, 
+        "type": "Bracelet", 
+        "id": "023", 
+        "img": "item-7.jpg",
+        "wasBougth": 15,
+		    "color": "none"
+      },
+      {
+        "title": "Браслет из граненого \n гематита и жемчужин", 
+        "designer": "MECHTA BABAEVA", 
+        "price": 200, 
+        "type": "Bracelet", 
+        "id": "024", 
+        "img": "item-8.jpg",
+        "wasBougth": 216,
+		    "color": "black"
+		
+      },
+      {
+        "title": "Браслет Монстера", 
+        "designer": "ANNA SLAVUTINA", 
+        "price": 1200, 
+        "type": "Bracelet", 
+        "id": "025", 
+        "img": "item-9.jpg",
+        "wasBougth": 46,
+		    "color": "green"
+      },
+      {
+        "title": "Браслет фенечка \n с розовым жемчугом", 
+        "designer": "WAVES&GEMS", 
+        "price": 4200, 
+        "type": "Bracelet", 
+        "id": "026", 
+        "img": "item-10.jpg",
+        "wasBougth": 80,
+		    "color": "pink"
+      },
+      {
+        "title": "Браслет Соло соль\n жемчужный", 
+        "designer": "ANNA SLAVUTINA", 
+        "price": 6200, 
+        "type": "Bracelet", 
+        "id": "027", 
+        "img": "item-11.jpg",
+        "wasBougth": 44,
+		    "color": "white"
+      },
+      {
+        "title": "Подвеска \n из латуни M", 
+        "designer": "DORE ART", 
+        "price": 8200, 
+        "type": "Necklace", 
+        "id": "028", 
+        "img": "item-12.jpg",
+        "wasBougth": 24,
+		    "color": "none"
+      },
+      {
+        "title": "Браслет 'Little \n Dream' red", 
+        "designer": "IRINA VOLCHEK", 
+        "price": 9200, 
+        "type": "Bracelet", 
+        "id": "029", 
+        "img": "item-13.jpg",
+        "wasBougth": 66,
+		    "color": "red"
+      },
+      {
+        "title": "Подвеска \n из латуни А", 
+        "designer": "DORE ART", 
+        "price": 2200, 
+        "type": "Necklace", 
+        "id": "030", 
+        "img": "item-14.jpg",
+        "wasBougth": 56,
+		    "color": "none"
+      },
+      {
+        "title": "Серьги «Натуральная \n колибри»", 
+        "designer": "HONEY HANY", 
+        "price": 6600, 
+        "type": "Earring", 
+        "id": "031", 
+        "img": "item-15.jpg",
+        "wasBougth": 60,
+		    "color": "blue"
+        
+      },
+      {
+        "title": "Браслет 'Little Dream'", 
+        "designer": "IRINA VOLCHEK", 
+        "price": 5500, 
+        "type": "Bracelet", 
+        "id": "032", 
+        "img": "item-16.jpg",
+        "wasBougth": 70,
+		    "color": "white"
       }
   ]
 }
