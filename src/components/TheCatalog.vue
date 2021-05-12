@@ -186,7 +186,7 @@
      </div>
      <div class="loadmore" v-if="isNoneItems">
          <button 
-            class="button btn-active" 
+            class="button btnActive" 
             @click="loadmore"
             :class="{invalid : pages === 1}"
         >
@@ -353,11 +353,18 @@ export default {
                 if (this.previousCategory !== category) {
                     if ((this.minPrice !== this.min) | (this.maxPrice !== this.max)) {
                         this.openFilter() 
+                        
                     } 
                 } 
             }
             this.previousCategory = category
+            this.page = 1
             this.setPage(this.page)
+            
+            console.log(this.sortedProducts)
+            console.log( this.pagination)
+            console.log( this.ifProductSorted)
+
             
             
         },
@@ -377,7 +384,6 @@ export default {
             } else {
                 this.pagination = this.paginator(this.sortedProducts.length, p)
             }
-            
             this.page = p
         },
 
@@ -472,6 +478,7 @@ export default {
             } else {
                 return this.paginate(this.products)
             }
+           
         },
         sortprod() {
             return this.sortedProducts
@@ -484,10 +491,6 @@ export default {
         products(newpr, oldpr) {
             this.setPage(this.page)
             this.openFilter()
-       
-
-            
-  
         },
         sortprod(newpr, oldpr) {
             return this.sortedProducts
@@ -495,8 +498,7 @@ export default {
         searchArray(newser, oldser) {
             this.sortedProducts = this.$store.state.searchArray
             this.setPage(this.page)
-        }
-            
+        }      
        
     },
     created() {
