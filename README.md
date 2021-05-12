@@ -1,19 +1,3 @@
 # soul-caprice
-
-## Project setup
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Online store page developed on VUE3.
+See demo here: https://soul-caprice.web.app/
